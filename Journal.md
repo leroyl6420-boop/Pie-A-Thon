@@ -22,3 +22,11 @@ I added a background to the game (a checkered floor to make it feel more like a 
 I figured out how to detect the actions of the mouse (click, position, and such) and I drew a bunch of sprites for the flour minigame! That's what took up the most time, drawing really isn't my thing. Still, I want this game to be fully my own, so I'm gonna have to draw (:
 
 ![The flower bag sprite](Images/pixil-frame-0(15).png)
+
+# Devlog 4
+
+50 min 39sec Logged
+
+I'm mostly finished with the flour minigame! I thought that moving the spoon with the mouse would be tricky, but it turned out it was really easy. I just plugged in mouse_x and mouse_y for the spoon's x and y coords, and it worked fine. With a little tuning, of course (x + yada yada and y - yada yada). This was a lot simpler than I thought! I guess Python is known for being simple, though. However, I am dealing with a glitch where the spoon seems to constantly be sensing that it is touching the flour bag. I will have to look into that. 
+
+![A picture of the in-progress flour minigame](Images/P3.png)
