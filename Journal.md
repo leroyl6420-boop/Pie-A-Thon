@@ -30,3 +30,10 @@ I figured out how to detect the actions of the mouse (click, position, and such)
 I'm mostly finished with the flour minigame! I thought that moving the spoon with the mouse would be tricky, but it turned out it was really easy. I just plugged in mouse_x and mouse_y for the spoon's x and y coords, and it worked fine. With a little tuning, of course (x + yada yada and y - yada yada). This was a lot simpler than I thought! I guess Python is known for being simple, though. However, I am dealing with a glitch where the spoon seems to constantly be sensing that it is touching the flour bag. I will have to look into that. 
 
 ![A picture of the in-progress flour minigame](Images/P3.png)
+
+# Devlog 5
+58m 17sec Logged
+
+I finished the flour minigame! Turns out the bug was that the hitboxes of the sprites were drawn on top of each other and technically touching, while the actual sprites looked like they weren't. I fixed it and the flour minigame works well! I'll work on the crust minigame next.
+
+![The completed flour minigame](Images/P4.png) 
