@@ -21,4 +21,4 @@ I added a background to the game (a checkered floor to make it feel more like a 
 
 I figured out how to detect the actions of the mouse (click, position, and such) and I drew a bunch of sprites for the flour minigame! That's what took up the most time, drawing really isn't my thing. Still, I want this game to be fully my own, so I'm gonna have to draw (:
 
-![The flower bag sprite](Images/pixil-frame-0 (15).png)
+![The flower bag sprite](Images/pixil-frame-0(15).png)
