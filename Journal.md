@@ -45,3 +45,11 @@ I made a dough minigame! That's right, I realized that you would need to make do
 
 ![A picture of the Dough0 sprite!](Images/P5.png)
 ![A picture of the Dough4 sprite!](Images/P6.png)
+
+# Devlog 7
+1h 8min 32sec Logged
+
+I made the crust minigame! You initially circle the mouse to spread oil onto the dish, then you quickly left click to shape the crust. Again, I drew all the sprites. I added instructions on the top left of each minigame for user reference. 
+
+![An image of the first stage of the crust-making minigame](Images/p7.png)
+![An image of the completed crust-making minigame](Images/P8.png)
