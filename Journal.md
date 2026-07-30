@@ -37,3 +37,11 @@ I'm mostly finished with the flour minigame! I thought that moving the spoon wit
 I finished the flour minigame! Turns out the bug was that the hitboxes of the sprites were drawn on top of each other and technically touching, while the actual sprites looked like they weren't. I fixed it and the flour minigame works well! I'll work on the crust minigame next.
 
 ![The completed flour minigame](Images/P4.png) 
+
+# Devlog 6
+1h 9min 47sec Logged
+
+I made a dough minigame! That's right, I realized that you would need to make dough before shaping the crust. I wrote a complicated math algorithm to detect circles made by the mouse to detect kneading, which I totally didn't find on YouTube. I also had to draw many sprites to make the kneading interactive. Otherwise, it's more of the same knead-update-knead.
+
+![A picture of the Dough0 sprite!](Images/P5.png)
+![A picture of the Dough4 sprite!](Images/P6.png)
