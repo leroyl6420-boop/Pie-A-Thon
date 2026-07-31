@@ -61,3 +61,10 @@ I made some functional changes to my game! I made it so that you can't make doug
 
 ![An image of a missing ingredient screen](Images/P9.png)
 ![An image of a player (me lol) that has just picked up some dough, giving him a notification!](Images/P10.png)
+
+# Devlog 9
+1h 23min 39sec Logged
+
+I added a strawberry station to the game. You wash the strawberries and mash them to make a jam. Instead of a boolean for the acquisition, the strawberries are an integer, for customers may want multiple servings in their pie. I plan to add more fruits to the game. If room becomes a problem, I may replace individual fruit stations with an ingredient shelf. I honestly find the washing mechanic pretty boring after adding it, so I may get rid of it and add a jam maker to the game where you pour all your ingredients into a machine and crank a handle. I might add more ingredients next, or make a pie assembly station and an oven.
+
+![An image of the strawberry-washing process](Images/P11.png)
