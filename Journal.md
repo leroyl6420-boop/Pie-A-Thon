@@ -53,3 +53,11 @@ I made the crust minigame! You initially circle the mouse to spread oil onto the
 
 ![An image of the first stage of the crust-making minigame](Images/p7.png)
 ![An image of the completed crust-making minigame](Images/P8.png)
+
+# Devlog 8
+41min 22sec Logged
+
+I made some functional changes to my game! I made it so that you can't make dough before collecting flour, and that you couldn't make crust before making dough. I added neat warnings when you were missing ingredients and notifications when you picked them up. I'll add ingredient stations for fillings, a filling making station, and a pie assembly station before adding an oven. I'll also need to get to making the player sprite soon ToT. My ultimate goal is to add customers!
+
+![An image of a missing ingredient screen](Images/P9.png)
+![An image of a player (me lol) that has just picked up some dough, giving him a notification!](Images/P10.png)
