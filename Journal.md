@@ -73,3 +73,5 @@ I added a strawberry station to the game. You wash the strawberries and mash the
 1h 46min 12sec Logged
 
 I replaced the strawberry station with an ingredients station. I also got rid of strawberries entirely, and am instead using blueberries, cherries, pumpkins, and apples. I'll make a filler-making station next. I figured out how to update text real-time, so I can display how much of each ingredient the player has in the ingredient-gathering minigame. 
+
+![An image of the ingredient select minigame with the quantities of ingredients you have at the bottom](Images/P12.png)
