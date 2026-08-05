@@ -82,3 +82,10 @@ I replaced the strawberry station with an ingredients station. I also got rid of
 I successfully made an ingredient-gathering minigame by drawing four different fruits, making four different variables, and adding to those variables every time you click on those fruits in the minigame. I'll need to make a more complicated filler-making minigame now, but I have a good idea already (:
 
 ![An image of the ingredient-gathering minigame](Images/P13.png)
+
+# Devlog 12
+2h 2min 20sec Logged
+
+I drew and coded a jam-making machine by drawing the main body in the back and drawing a crank on top. The crank rotates with the mouse. I had to do a lot of fine tuning to make sure that the mouse had to follow a very certain path in order for the crank to follow. The mouse also cannot be too far away from the crank, and the crank can only be spun clockwise. When spun 360 degrees, the crank will convert the last fruit that you picked up into jam, discarding the fruit in the process. 
+
+![A picture of the jam-making machine](Images/P14.png)
