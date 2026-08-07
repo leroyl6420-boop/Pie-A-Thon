@@ -89,3 +89,11 @@ I successfully made an ingredient-gathering minigame by drawing four different f
 I drew and coded a jam-making machine by drawing the main body in the back and drawing a crank on top. The crank rotates with the mouse. I had to do a lot of fine tuning to make sure that the mouse had to follow a very certain path in order for the crank to follow. The mouse also cannot be too far away from the crank, and the crank can only be spun clockwise. When spun 360 degrees, the crank will convert the last fruit that you picked up into jam, discarding the fruit in the process. 
 
 ![A picture of the jam-making machine](Images/P14.png)
+
+# Devlog 13
+1h 39min 50sec Logged
+
+I coded the collection confirmation function of the ingredient shelf. I made it so that every time you collect an item of a different type, the collection message will create a new line for that item. That allows for up to four lines displayed above your character at a time. I also coded a trash can. It has the same confirmation message logic as the ingredient shelf, except its text is red. 
+
+![An image of the ingredient shelf confirmation message](images/P15.png)
+![An image of the trash confirmation message](Images/P16.png)
