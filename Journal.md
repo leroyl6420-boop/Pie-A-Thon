@@ -97,3 +97,11 @@ I coded the collection confirmation function of the ingredient shelf. I made it 
 
 ![An image of the ingredient shelf confirmation message](Images/P15.png)
 ![An image of the trash confirmation message](Images/P16.png)
+
+# Devlog 14
+1h 8min 24sec Logged
+
+I coded the jam acquisition message, same as the fruit and trash confirmation messages. I have noticed an oversight where the acquisition message states the total number of items you have instead of the number you newly acquired. I must find a way to fix that. Anyway, I also added a fruit display to the jam-making minigame. It shows the fruits you currently have in your inventory in the fruit slot above the jam-maker, and as you turn the crank, the fruits disappear. 
+
+![An image of the jam-making minigame, now with the fruits you need to process displayed above the crank in the fruit slot](Images/P17.png)
+![An image of the jam acquisition message](Images/P18.png)
