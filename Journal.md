@@ -95,5 +95,5 @@ I drew and coded a jam-making machine by drawing the main body in the back and d
 
 I coded the collection confirmation function of the ingredient shelf. I made it so that every time you collect an item of a different type, the collection message will create a new line for that item. That allows for up to four lines displayed above your character at a time. I also coded a trash can. It has the same confirmation message logic as the ingredient shelf, except its text is red. 
 
-![An image of the ingredient shelf confirmation message](images/P15.png)
+![An image of the ingredient shelf confirmation message](Images/P15.png)
 ![An image of the trash confirmation message](Images/P16.png)
