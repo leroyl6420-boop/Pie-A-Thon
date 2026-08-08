@@ -120,3 +120,10 @@ I drew a sprite for the chef and two ovens. I plan to use the white bars on the 
 
 ![An image of the chef and oven sprites](Images/P20.png)
 ![An image of the jams displayed at the bottom of the assembly minigame](Images/P19.png)
+
+# Devlog 17
+2h 10min 45sec Logged
+
+I coded the system for jams to be placed on the side of the minigame screen when you select them. It is similar to the system that displays them on the bottom of the screen. Since coding this took such a long time, I didn't want to have to collect ingredients, make jam, collect flour, make dough, and shape a crust every time I wanted to test the code. So, I implemented a cheat code. If you stand on the trash square and left click, you will get 10 jams and a crust. Anyways, I'll get to the baking mechanism next. 
+
+![An image of the assembly minigame, with jams on the bottom and on the sides](Images/P21.png)
