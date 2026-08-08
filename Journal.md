@@ -112,3 +112,11 @@ I coded the jam acquisition message, same as the fruit and trash confirmation me
 I fixed two oversights. The first was an oversight where acquisition messages would print, say, "Acquired 1 Apples!" or "Acquired 1 Apple Jams!". I updated the messages so that they now print "Acquired an Apple!" and such when you only pick up one of an item. The second oversight was the fact that you would not get any acquisition messages if you quit the jam-making minigame early by pressing "e". I created acquisition messages for that event, and it was fixed. 
 
 ![An image of some of the single-unit acquisition messages](Images/Screenshot2026-08-07175153.png)
+
+# Devlog 16
+1h 17min 58sec Logged
+
+I drew a sprite for the chef and two ovens. I plan to use the white bars on the ovens as progress bars. I also started on the assembly minigame. I plan for the crust to be in the middle of the screen, and for you to choose ingredients to add. I have already created a jam display at the bottom of the minigame. Of course, I gave the ovens hitboxes and collision. The activation areas are right to the left of the ovens, being 50x100 rectangles. I am super glad to finally have a sprite for the chef, it's been too long moving around as a red square lol...
+
+![An image of the chef and oven sprites](Images/P20.png)
+![An image of the jams displayed at the bottom of the assembly minigame](Images/P19.png)
