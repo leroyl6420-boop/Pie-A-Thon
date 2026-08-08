@@ -111,4 +111,4 @@ I coded the jam acquisition message, same as the fruit and trash confirmation me
 
 I fixed two oversights. The first was an oversight where acquisition messages would print, say, "Acquired 1 Apples!" or "Acquired 1 Apple Jams!". I updated the messages so that they now print "Acquired an Apple!" and such when you only pick up one of an item. The second oversight was the fact that you would not get any acquisition messages if you quit the jam-making minigame early by pressing "e". I created acquisition messages for that event, and it was fixed. 
 
-![An image of some of the single-unit acquisition messages](Images/pixil-frame-0(15).png)
+![An image of some of the single-unit acquisition messages](Images/Screenshot2026-08-07175153.png)
