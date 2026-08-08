@@ -127,3 +127,10 @@ I drew a sprite for the chef and two ovens. I plan to use the white bars on the 
 I coded the system for jams to be placed on the side of the minigame screen when you select them. It is similar to the system that displays them on the bottom of the screen. Since coding this took such a long time, I didn't want to have to collect ingredients, make jam, collect flour, make dough, and shape a crust every time I wanted to test the code. So, I implemented a cheat code. If you stand on the trash square and left click, you will get 10 jams and a crust. Anyways, I'll get to the baking mechanism next. 
 
 ![An image of the assembly minigame, with jams on the bottom and on the sides](Images/P21.png)
+
+# Devlog 18
+1h 19min 54sec Logged
+
+I coded the ovens. They now have working progress bars. The pies need to cook for at least 6 seconds before being ready to be taken out, and they will remain unburnt for 15 seconds before needing to be discarded. The way the ovens store the info of the pies is by copying the jam list that went into the pie. I'll be making the customers next. 
+
+![An image of the ovens cooking (top one is done, bottom one is still cooking)](Images/P22.png)
