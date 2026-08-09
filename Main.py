@@ -8,17 +8,26 @@ import pygame
 import sys
 import time
 import math
+import os 
+from pathlib import Path
+BASE_DIR = Path(__file__).resolve().parent
+os.chdir(BASE_DIR)
 pygame.init()
 screen = pygame.display.set_mode((800, 600))
 HEIGHT = 600
 WIDTH = 800
 inminigame = False
+
+# Change to True if you want cheats! 
+
+CHEATS = False
+
 clicks = 0
 BG = pygame.image.load("Pie-A-Thon_BG.png").convert_alpha()
 Bowl1 = pygame.image.load("Bowl1.png").convert_alpha()
 Bowl2 = pygame.image.load("Bowl2.png").convert_alpha()
 Bowl3 = pygame.image.load("Bowl3.png").convert_alpha()
-Bowl4 = pygame.image.load("Bowl3.png").convert_alpha()
+Bowl4 = pygame.image.load("Bowl4.png").convert_alpha()
 FallingFlour = pygame.image.load("FallingFlour.png").convert_alpha()
 Flour1u = pygame.image.load("Flour1.png").convert_alpha()
 Flour2u = pygame.image.load("Flour2.png").convert_alpha()
@@ -67,6 +76,24 @@ Blueberryjam = pygame.image.load("Blueberryjam.png").convert_alpha()
 Cherryjam = pygame.image.load("Cherryjam.png").convert_alpha()
 Pumpkinjam = pygame.image.load("Pumpkinjam.png").convert_alpha()
 Applejam = pygame.image.load("Applejam.png").convert_alpha()
+Customer1u = pygame.image.load("Customer1.png").convert_alpha()
+Customer2u = pygame.image.load("Customer2.png").convert_alpha()
+Customer3u = pygame.image.load("Customer3.png").convert_alpha()
+Customer4u = pygame.image.load("Customer4.png").convert_alpha()
+Customer5u = pygame.image.load("Customer5.png").convert_alpha()
+Customer6u = pygame.image.load("Customer6.png").convert_alpha()
+Customer7u = pygame.image.load("Customer7.png").convert_alpha()
+Customer8u = pygame.image.load("Customer8.png").convert_alpha()
+Customer9u = pygame.image.load("Customer9.png").convert_alpha()
+Customer1 = pygame.transform.scale(Customer1u, (50, 50))
+Customer2 = pygame.transform.scale(Customer2u, (50, 50))
+Customer3 = pygame.transform.scale(Customer3u, (50, 50))
+Customer4 = pygame.transform.scale(Customer4u, (50, 50))
+Customer5 = pygame.transform.scale(Customer5u, (50, 50))
+Customer6 = pygame.transform.scale(Customer6u, (50, 50))
+Customer7 = pygame.transform.scale(Customer7u, (50, 50))
+Customer8 = pygame.transform.scale(Customer8u, (50, 50))
+Customer9 = pygame.transform.scale(Customer9u, (50, 50))
 pivotx = 13
 pivoty = 13
 pivot_surface = pygame.Surface((400, 400), pygame.SRCALPHA)
@@ -132,6 +159,7 @@ Oven1_rect = Oven.get_rect(topleft=(700, 200))
 Oven2_rect = Oven.get_rect(topleft=(700, 350))
 Oven1_hitbox = pygame.Rect(650, 200, 50, 100)
 Oven2_hitbox = pygame.Rect(650, 350, 50, 100)
+Serve_hitbox = pygame.Rect(50, 100, 50, 50)
 
 speed = 5
 earliestspot = 30
@@ -151,8 +179,25 @@ assemblydisplayleftlist = []
 assemblydisplayrightlist = []
 assemblydisplayleftliststate = -1
 assemblydisplayrightliststate = -1
-
+pielist = []
+pieliststate = -1
+pa = False
 running = True
+oven1on = False
+oven2on = False
+oven1count = 9999999999999
+oven2count = 9999999999999
+progress1color = 0
+progress2color = 0
+customerx = 750
+lastcustomerspawntimer = -1
+linestate = 0
+haspie = False
+customerdisplaystate = 0
+Customerstate = [Customer1, Customer2, Customer3, Customer4, Customer5, Customer6, Customer7, Customer8, Customer9]
+Customerstatestate = 0
+playerpielist = []
+hasbakedpie = False
 
 Flour = [Flour1, Flour2, Flour3, Flour4]
 Flourstate = 0
@@ -201,6 +246,10 @@ trashtext2 = font.render("Press E", True, (255, 255, 255))
 assemblytext1 = font.render("Assem-", True, (255, 255, 255))
 assemblytext2 = font.render("bly", True, (255, 255, 255))
 assemblytext3 = font.render("Press E", True, (255, 255, 255))
+assemblytext7 = font.render("Acquired Assembled Pie!", True, (0, 255, 0))
+servetext1 = font.render("Served a Pie!", True, (0, 255, 0))
+bakedpieacquiredtext = font.render("Acquired Baked Pie!", True, (0, 255, 0))
+points = 0
 
 fa = font.render("Flour Aquired!", True, (0, 255, 0))
 da = font.render("Dough Aquired!", True, (0, 255, 0))
@@ -209,7 +258,10 @@ missingflour = font.render("Missing Flour!", True, (255, 0, 0))
 missingdough = font.render("Missing Dough!", True, (255, 0, 0))
 jamtext5 = font.render("Missing Ingredients!", True, (255, 0, 0))
 strawberrytext4 = font.render("Max Ingredients!", True, (255, 0, 0))
+alreadyhavepietext = font.render("Maxxed Pies!", True, (255, 0, 0))
+alreadyhavepie = False
 
+served = False
 dd = False
 cd = False
 fd = False
@@ -221,6 +273,7 @@ hascrust = False
 Strawberryammount = 0
 clean = 0
 jd = False
+bakedpieacquired = False
 
 blueberries = 0
 pumpkins = 0
@@ -231,10 +284,13 @@ pumpkinjam = 0
 cherryjam = 0
 applejam = 0
 assemblydisplay = 0
+spawn = False
 
 fruits = []
 fruitstate = -1
 playerstate = 0
+oven1pie = []
+oven2pie = []
 
 rotated_crank = pygame.transform.rotate(
     pivot_surface,
@@ -255,16 +311,22 @@ while running:
                 clicks += 1
 
                 #CHEATS
-                if player.colliderect(trash):    
-                    hascrust = True
-                    applejam = 3
-                    blueberryjam = 3
-                    pumpkinjam = 2
-                    cherryjam = 2
+                if CHEATS == True:
+                    if player.colliderect(trash):    
+                        hascrust = True
+                        applejam = 3
+                        blueberryjam = 3
+                        pumpkinjam = 2
+                        cherryjam = 2
+                    linestate += 1
 
                 
             if event.button == 3:
                 print("right click")
+                if CHEATS == True:
+                    linestate -= 1
+                    Customerstatestate += 1
+
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.KEYDOWN:
@@ -274,6 +336,11 @@ while running:
             if event.key == pygame.K_e:
                 if player.colliderect(flour) or player.colliderect(jam) or player.colliderect(assembly) or player.colliderect(crust) or player.colliderect(dough) or player.colliderect(strawberries):
                     inminigame = not inminigame
+                if player.colliderect(assembly) and inminigame == False and pieliststate > -1:
+                    pa = True
+                    text_cooldown = pygame.time.get_ticks() + 1000
+                    haspie = True
+                    hascrust = False
                 if player.colliderect(strawberries) and inminigame == False:
                     sd = True
                     pumpa = font.render(f"Acquired {pumpkins} Pumpkins!", True, (0, 255, 0))
@@ -325,12 +392,59 @@ while running:
                         blueberryjama = font.render(f"Acquired a Blueberry Jam!", True, (0, 255, 0))
                     jd == True
                     text_cooldown = pygame.time.get_ticks() + 1000
-                if player.colliderect(Oven1_hitbox):
-                    print("hi")
-                if player.colliderect(Oven2_hitbox):
-                    print("hi")
+                if player.colliderect(Oven1_hitbox) and pieliststate > -1 and not oven1on:
+                    oven1pie = pielist.copy()
+                    pielist.clear()
+                    assemblydisplayright = 0
+                    assemblydisplayleft = 0
+                    assemblydisplayleftlist.clear()
+                    assemblydisplayrightlist.clear()
+                    assemblydisplayleftliststate = -1
+                    assemblydisplayrightliststate = -1
+                    hascrust = False
+                    pieliststate = -1
+                    oven1on = True
+                    oven1count = pygame.time.get_ticks() + 8000
+                if player.colliderect(Oven2_hitbox) and pieliststate > -1 and not oven2on:
+                    pielist.clear()
+                    assemblydisplayright = 0
+                    assemblydisplayleft = 0
+                    assemblydisplayleftlist.clear()
+                    assemblydisplayrightlist.clear()
+                    assemblydisplayleftliststate = -1
+                    assemblydisplayrightliststate = -1
+                    hascrust = False
+                    oven2pie = pielist.copy()
+                    pieliststate = -1
+                    oven2on = True
+                    oven2count = pygame.time.get_ticks() + 8000
+                if oven1count - pygame.time.get_ticks() < 2000 and player.colliderect(Oven1_hitbox):
+                    if hasbakedpie == False:
+                        oven1on = False
+                        hasbakedpie = True
+                        bakedpieacquired = True
+                        text_cooldown = pygame.time.get_ticks() + 1000
+                    else: 
+                        alreadyhavepie = True
+                        text_cooldown = pygame.time.get_ticks() + 1000
+                if oven2count - pygame.time.get_ticks() < 2000 and player.colliderect(Oven2_hitbox):
+                    if hasbakedpie == False:
+                        hasbakedpie = True
+                        bakedpieacquired = True
+                        oven2on = False
+                        text_cooldown = pygame.time.get_ticks() + 1000
+                    else:
+                        alreadyhavepie = True
+                        text_cooldown = pygame.time.get_ticks() + 1000
+                if player.colliderect(Serve_hitbox) and hasbakedpie == True:
+                    hasbakedpie = False
+                    served = True
+                    linestate -= 1
+                    Customerstatestate += 1
+                    points += 1
+                    text_cooldown = pygame.time.get_ticks() + 1000
 
-# MOVEMENT
+# MOVEMENT 
 
     if inminigame == False:
         keys = pygame.key.get_pressed()
@@ -425,16 +539,42 @@ while running:
 
 # MSC.
 
+    customerspawntimer = pygame.time.get_ticks() // 20000
+    if customerspawntimer > lastcustomerspawntimer:
+        spawn = True
+        linestate += 1
+    lastcustomerspawntimer = customerspawntimer
 
 
 # DISPLAY
 
     screen.fill ((30, 30, 30))
-    screen.blit(BG, (0, 0))
+    screen.blit(BG, (0, 0))    
+    pointstext = font.render(f"Points: {points}", True, (0, 255, 0))
+    screen.blit(pointstext, (650, 0))
+
+    Customerstatestatequotient = Customerstatestate // 9
+    Customerstatestateremainder = Customerstatestate - (Customerstatestatequotient * 9)
+    endshow = Customerstatestateremainder + linestate
+    Customercount = Customerstatestateremainder
+    Cycle = Customerstatestateremainder
+    linestatecount = 1
+    while Cycle < endshow:
+        linex = linestatecount * 50
+        screen.blit(Customerstate[(Customercount)], (linex, 0))
+        if Customercount < 8:
+            Customercount += 1
+        else:
+            Customercount = 0
+        linestatecount += 1
+        Cycle += 1
+    print (Customerstatestateremainder)
+
     pygame.draw.rect(screen, (0, 0, 255), crust)
     screen.blit(crusttext1, (450, 500))
     screen.blit(crusttext2, (450, 520))
     screen.blit(crusttext3, (450, 540))
+    pygame.draw.rect(screen, (0, 0, 255), Serve_hitbox)
     pygame.draw.rect(screen, (0, 0, 255), flour)
     screen.blit(flourtext1, (0, 350))
     screen.blit(flourtext2, (0, 370))
@@ -467,7 +607,63 @@ while running:
         screen.blit(playerdown, (player.x, player.y))
     pygame.draw.rect(screen, (115, 133, 149), wall2)
     screen.blit(Oven, (700, 200))
+    if bakedpieacquired == True:
+        if pygame.time.get_ticks() < text_cooldown:
+            screen.blit(bakedpieacquiredtext, (player.x - 100, player.y - 30))
+        else:
+            bakedpieacquired = False
+    if alreadyhavepie == True:
+        if pygame.time.get_ticks() < text_cooldown:
+            screen.blit(alreadyhavepietext, (player.x - 100, player.y - 30))
+        else:
+            alreadyhavepie = False
+    if oven1on == True:
+        if oven1count - pygame.time.get_ticks() > 6000:
+            progress1 = 20
+            progress1color = (255, 255, 0)
+        if oven1count - pygame.time.get_ticks() > 4000 and oven1count - pygame.time.get_ticks() < 6000:
+            progress1 = 40
+            progress1color = (255, 255, 0)
+        if oven1count - pygame.time.get_ticks() > 2000 and oven1count - pygame.time.get_ticks() < 4000:
+            progress1 = 60
+            progress1color = (255, 255, 0)
+        if oven1count - pygame.time.get_ticks() > 0 and oven1count- pygame.time.get_ticks() < 2000:
+            progress1 = 80
+            progress1color = (0, 255, 0)
+        if oven1count - pygame.time.get_ticks() < -7000:
+            progress1 = 80
+            progress1color = (255, 0, 0)
+        bar1 = pygame.Rect(730, 210, 10, progress1)
+        pygame.draw.rect(screen, (progress1color), bar1)
     screen.blit(Oven, (700, 350))
+    if oven2on == True:
+        if oven2count - pygame.time.get_ticks() > 6000:
+            progress2 = 20
+            progress2color = (255, 255, 0)
+        if oven2count - pygame.time.get_ticks() > 4000 and oven2count - pygame.time.get_ticks() < 6000:
+            progress2 = 40
+            progress2color = (255, 255, 0)
+        if oven2count - pygame.time.get_ticks() > 2000 and oven2count - pygame.time.get_ticks() < 4000:
+            progress2 = 60
+            progress2color = (255, 255, 0)
+        if oven2count - pygame.time.get_ticks() > 0 and oven2count - pygame.time.get_ticks() < 2000:
+            progress2 = 80
+            progress2color = (0, 255, 0)
+        if oven2count - pygame.time.get_ticks() < -7000:
+            progress2 = 80
+            progress2color = (255, 0, 0)
+        bar2 = pygame.Rect(730, 360, 10, progress2)
+        pygame.draw.rect(screen, (progress2color), bar2)
+    if served == True:
+        if pygame.time.get_ticks() < text_cooldown:
+            screen.blit(servetext1, (player.x - 50, player.y - 30))
+        else:
+            served = False
+    if pa == True:
+        if pygame.time.get_ticks() < text_cooldown:
+            screen.blit(assemblytext7, (player.x - 120, player.y - 30))
+        else:
+            pa = False
     if jd == True:
         earliestspot = 30
         if pygame.time.get_ticks() < text_cooldown:
@@ -885,7 +1081,7 @@ while running:
                     if event.button == 1:
                         LeftClick = True
                 if LeftClick == True and mouse_y > 475 and mouse_y < 550 and LastClick == False:
-                    if mouse_x > applejamclickareaxstart and mouse_x < applejamclickareaxend:
+                    if applejam > 0 and mouse_x > applejamclickareaxstart and mouse_x < applejamclickareaxend:
                         print("Apple Jam Selected")
                         if assemblydisplayleft < 5:
                             assemblydisplayleft += 1
@@ -896,7 +1092,9 @@ while running:
                             assemblydisplayrightlist.append("applejam")
                             assemblydisplayrightliststate += 1
                         applejam -= 1
-                    if mouse_x > blueberryjamclickareaxstart and mouse_x < blueberryjamclickareaxend:
+                        pielist.append("applejam")
+                        pieliststate += 1
+                    if blueberryjam > 0 and mouse_x > blueberryjamclickareaxstart and mouse_x < blueberryjamclickareaxend:
                         print("Blueberry Jam Selected")
                         if assemblydisplayleft < 5:
                             assemblydisplayleft += 1
@@ -907,7 +1105,9 @@ while running:
                             assemblydisplayrightlist.append("blueberryjam")
                             assemblydisplayrightliststate += 1
                         blueberryjam -= 1
-                    if mouse_x > cherryjamclickareaxstart and mouse_x < cherryjamclickareaxend:
+                        pielist.append("blueberryjam")
+                        pieliststate += 1
+                    if cherryjam > 0 and mouse_x > cherryjamclickareaxstart and mouse_x < cherryjamclickareaxend:
                         print("Cherry Jam Selected")
                         if assemblydisplayleft < 5:
                             assemblydisplayleft += 1
@@ -918,7 +1118,9 @@ while running:
                             assemblydisplayrightlist.append("cherryjam")
                             assemblydisplayrightliststate += 1
                         cherryjam -= 1
-                    if mouse_x > pumpkinjamclickareaxstart and mouse_x < pumpkinjamclickareaxend:
+                        pielist.append("cherryjam")
+                        pieliststate += 1
+                    if pumpkinjam > 0 and mouse_x > pumpkinjamclickareaxstart and mouse_x < pumpkinjamclickareaxend:
                         print("Pumpkin Jam Selected")
                         if assemblydisplayleft < 5:
                             assemblydisplayleft += 1
@@ -929,8 +1131,16 @@ while running:
                             assemblydisplayrightlist.append("pumpkinjam")
                             assemblydisplayrightliststate += 1
                         pumpkinjam -= 1
+                        pielist.append("pumpkinjam")
+                        pieliststate += 1
+                if blueberryjam + applejam + pumpkinjam + cherryjam == 0:
+                    inminigame = False
+                    haspie = True
+                    hascrust = False
+                    pa = True
+                    text_cooldown = pygame.time.get_ticks() + 1000
                 LastClick = LeftClick
-
+            
         if player.colliderect(assembly) and blueberryjam == 0 and pumpkinjam == 0 and applejam == 0 and cherryjam == 0:
             if hascrust == False:
                 screen.blit(assemblytext6, (250, 290))
