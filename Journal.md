@@ -134,3 +134,10 @@ I coded the system for jams to be placed on the side of the minigame screen when
 I coded the ovens. They now have working progress bars. The pies need to cook for at least 6 seconds before being ready to be taken out, and they will remain unburnt for 15 seconds before needing to be discarded. The way the ovens store the info of the pies is by copying the jam list that went into the pie. I'll be making the customers next. 
 
 ![An image of the ovens cooking (top one is done, bottom one is still cooking)](Images/P22.png)
+
+# Devlog 19
+2h 16min 24sec Logged
+
+Wow, this may have been the hardest coding session I've ever done. I coded the customers' linking up feature. I couldn't figure out how to use a list to carry sprites for the first hour, and I was stuck writing tons of if statements. After I finally got it working, I couldn't figure out how to get it to delete from the front of the line when you served the customers, plus the fact that they were lining up from the left to the right, now from the right to the left like I wanted. In the end, I fidgeted with the greater than/less than statements a bunch and I tested with a bunch of variables being set to 0 or 1, and it somehow worked. I guess I sorta followed my Asian math gut instinct. Well, I'm not complaining. 
+
+![A picture of the (somehow) working line](Images/P23.png)
